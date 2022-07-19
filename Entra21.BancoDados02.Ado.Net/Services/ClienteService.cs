@@ -37,7 +37,6 @@ VALUES (@NOME, @RENDA, @CPF, @DATA_NASCIMENTO, @EH_INADIMPLENTE)";
             comando.Parameters.AddWithValue("@CPF", cliente.Cpf);
             comando.Parameters.AddWithValue("@DATA_NASCIMENTO", cliente.DataNascimento);
             comando.Parameters.AddWithValue("@EH_INADIMPLENTE", cliente.EhInadimplente);
-            comando.Parameters.AddWithValue("@ID", cliente.Id);
 
             comando.ExecuteNonQuery();
 
@@ -46,7 +45,6 @@ VALUES (@NOME, @RENDA, @CPF, @DATA_NASCIMENTO, @EH_INADIMPLENTE)";
 
         public void Editar(Cliente cliente)
         {
-
             var comando = _conexao.ConectarCriandoComando();
             comando.CommandText = @"UPDATE clientes SET 
 nome = @NOME,
@@ -74,12 +72,13 @@ WHERE id = @ID";
             comando.CommandText = @"SELECT id, nome, renda, cpf, data_nascimento, eh_inadimplente 
 FROM clientes
 WHERE id = @ID";
-
             comando.Parameters.AddWithValue("@ID", id);
-
 
             var tabelaEmMemoria = new DataTable();
             tabelaEmMemoria.Load(comando.ExecuteReader());
+
+            if (tabelaEmMemoria.Rows.Count == 0)
+                return null;
 
             var registro = tabelaEmMemoria.Rows[0];
 

@@ -2,6 +2,7 @@
 {
     internal class PedidoProduto
     {
+        public int Id { get; set; }
         public int Quantidade { get; set; }
 
         public Pedido Pedido { get; set; }

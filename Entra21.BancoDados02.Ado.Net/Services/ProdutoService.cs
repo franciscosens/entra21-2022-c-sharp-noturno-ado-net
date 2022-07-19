@@ -65,6 +65,9 @@ WHERE id = @ID";
             var tabelaEmMemoria = new DataTable();
             tabelaEmMemoria.Load(comando.ExecuteReader());
 
+            if (tabelaEmMemoria.Rows.Count == 0)
+                return null;
+
             var registro = tabelaEmMemoria.Rows[0];
 
             var produto = new Produto();
