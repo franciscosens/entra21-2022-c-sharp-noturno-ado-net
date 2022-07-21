@@ -1,4 +1,5 @@
 using Entra21.BancoDados02.Ado.Net.Views;
+using Entra21.BancoDados02.Ado.Net.Views.Clientes;
 
 namespace Entra21.BancoDados02.Ado.Net
 {
@@ -13,7 +14,7 @@ namespace Entra21.BancoDados02.Ado.Net
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new MenuForm());
+            Application.Run(new ClienteCadastroEdicaoForm());
         }
     }
 }

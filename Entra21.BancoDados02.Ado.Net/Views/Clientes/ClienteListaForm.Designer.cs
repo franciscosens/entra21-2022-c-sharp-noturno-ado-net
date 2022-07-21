@@ -52,70 +52,78 @@
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
             this.dataGridView.RowHeadersWidth = 72;
-            this.dataGridView.Size = new System.Drawing.Size(809, 328);
+            this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView.Size = new System.Drawing.Size(866, 399);
             this.dataGridView.TabIndex = 0;
             // 
             // buttonCadastrar
             // 
             this.buttonCadastrar.Image = global::Entra21.BancoDados02.Ado.Net.Properties.Resources.plus;
-            this.buttonCadastrar.Location = new System.Drawing.Point(774, 7);
+            this.buttonCadastrar.Location = new System.Drawing.Point(831, 7);
             this.buttonCadastrar.Margin = new System.Windows.Forms.Padding(2);
             this.buttonCadastrar.Name = "buttonCadastrar";
             this.buttonCadastrar.Size = new System.Drawing.Size(42, 42);
             this.buttonCadastrar.TabIndex = 1;
             this.buttonCadastrar.UseVisualStyleBackColor = true;
+            this.buttonCadastrar.Click += new System.EventHandler(this.buttonCadastrar_Click);
             // 
             // buttonEditar
             // 
             this.buttonEditar.Image = global::Entra21.BancoDados02.Ado.Net.Properties.Resources.pencil;
-            this.buttonEditar.Location = new System.Drawing.Point(728, 7);
+            this.buttonEditar.Location = new System.Drawing.Point(785, 7);
             this.buttonEditar.Margin = new System.Windows.Forms.Padding(2);
             this.buttonEditar.Name = "buttonEditar";
             this.buttonEditar.Size = new System.Drawing.Size(42, 42);
             this.buttonEditar.TabIndex = 2;
             this.buttonEditar.UseVisualStyleBackColor = true;
+            this.buttonEditar.Click += new System.EventHandler(this.buttonEditar_Click);
             // 
             // buttonApagar
             // 
             this.buttonApagar.Image = global::Entra21.BancoDados02.Ado.Net.Properties.Resources.delete;
-            this.buttonApagar.Location = new System.Drawing.Point(682, 7);
+            this.buttonApagar.Location = new System.Drawing.Point(739, 7);
             this.buttonApagar.Margin = new System.Windows.Forms.Padding(2);
             this.buttonApagar.Name = "buttonApagar";
             this.buttonApagar.Size = new System.Drawing.Size(42, 42);
             this.buttonApagar.TabIndex = 3;
             this.buttonApagar.UseVisualStyleBackColor = true;
-            this.buttonApagar.Click += new System.EventHandler(this.button3_Click);
+            this.buttonApagar.Click += new System.EventHandler(this.buttonApagar_Click);
             // 
             // ColumnId
             // 
             this.ColumnId.HeaderText = "Código";
             this.ColumnId.Name = "ColumnId";
             this.ColumnId.ReadOnly = true;
+            this.ColumnId.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // ColumnNome
             // 
+            this.ColumnNome.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.ColumnNome.HeaderText = "Nome";
             this.ColumnNome.Name = "ColumnNome";
             this.ColumnNome.ReadOnly = true;
+            this.ColumnNome.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // ColumnInadimplente
             // 
-            this.ColumnInadimplente.HeaderText = "Inadimplente";
+            this.ColumnInadimplente.HeaderText = "Status";
             this.ColumnInadimplente.Name = "ColumnInadimplente";
             this.ColumnInadimplente.ReadOnly = true;
+            this.ColumnInadimplente.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // ClienteListaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(825, 386);
+            this.ClientSize = new System.Drawing.Size(884, 461);
             this.Controls.Add(this.buttonApagar);
             this.Controls.Add(this.buttonEditar);
             this.Controls.Add(this.buttonCadastrar);
             this.Controls.Add(this.dataGridView);
             this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "ClienteListaForm";
-            this.Text = "ClienteListaForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Clientes";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 

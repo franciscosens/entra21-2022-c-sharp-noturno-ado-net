@@ -1,6 +1,6 @@
 ﻿namespace Entra21.BancoDados02.Ado.Net.Models
 {
-    internal class PedidoProduto
+    public class PedidoProduto
     {
         public int Id { get; set; }
         public int Quantidade { get; set; }
