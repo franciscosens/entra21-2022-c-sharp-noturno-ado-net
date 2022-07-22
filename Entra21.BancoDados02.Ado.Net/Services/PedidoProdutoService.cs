@@ -1,5 +1,6 @@
 ﻿using Entra21.BancoDados02.Ado.Net.Database;
 using Entra21.BancoDados02.Ado.Net.Models;
+using System.Data;
 
 namespace Entra21.BancoDados02.Ado.Net.Services
 {
@@ -49,6 +50,44 @@ namespace Entra21.BancoDados02.Ado.Net.Services
             comando.ExecuteNonQuery();
 
             comando.Connection.Close();
+        }
+
+
+        public List<PedidoProduto> ObterPorIdPedido(int idPedido)
+        {
+            var comando = new Conexao().ConectarCriandoComando();
+
+            comando.CommandText = @"SELECT 
+pro.id AS 'ProdutoId', 
+pro.nome AS 'ProdutoNome',
+pro.valor_unitario AS 'ProdutoValorUnitario',
+pp.quantidade AS 'Quantidade'
+FROM pedidos_produtos AS pp
+INNER JOIN produtos AS pro ON(pp.id_produto = pro.id)
+WHERE pp.id_pedido = @ID_PEDIDO";
+            comando.Parameters.AddWithValue("@ID_PEDIDO", idPedido);
+
+            var tabelaEmMemoria = new DataTable();
+            tabelaEmMemoria.Load(comando.ExecuteReader());
+
+            var pedidoProdutos = new List<PedidoProduto>();
+
+            for (int i = 0; i < tabelaEmMemoria.Rows.Count; i++)
+            {
+                var registro = tabelaEmMemoria.Rows[i];
+
+                var pedidoProduto = new PedidoProduto();
+                pedidoProduto.Quantidade = Convert.ToInt32(registro["Quantidade"]);
+
+                pedidoProduto.Produto = new Produto();
+                pedidoProduto.Produto.ValorUnitario = Convert.ToDecimal(registro["ProdutoValorUnitario"]);
+                pedidoProduto.Produto.Id = Convert.ToInt32(registro["ProdutoId"]);
+                pedidoProduto.Produto.Nome = registro["ProdutoNome"].ToString();
+
+                pedidoProdutos.Add(pedidoProduto);
+            }
+
+            return pedidoProdutos;
         }
     }
 }

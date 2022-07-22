@@ -8,7 +8,7 @@ namespace Entra21.BancoDados01.Ado.Net.DataBase
         {
             //Instanciado um objeto da classe SqlConnection, que permitirá
             //Fazer selects, inserts, updates, deletes, etc...
-            SqlConnection conexao = new SqlConnection();
+            var conexao = new SqlConnection();
 
             //String que contem o caminho para o banco de dados, o que permitira conectar ao bando de dados
             var connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=\\SERVER\Profs-E21\francisco.sens\Downloads\ExemploBancoDados01AdoNet.mdf;Integrated Security=True;Connect Timeout=30";

@@ -1,4 +1,5 @@
-﻿using Entra21.BancoDados02.Ado.Net.Models;
+﻿using Entra21.BancoDados02.Ado.Net.Helpers;
+using Entra21.BancoDados02.Ado.Net.Models;
 using Entra21.BancoDados02.Ado.Net.Services;
 using Entra21.BancoDados02.Ado.Net.Views.Components;
 using System.Data.SqlClient;
@@ -10,13 +11,13 @@ namespace Entra21.BancoDados02.Ado.Net.Views.Clientes
         private readonly int _idParaEditar;
         private readonly ClienteService _clienteService;
 
-        private const int modoEdicao = -1;
+        private const int modoCadastro = -1;
 
         public ClienteCadastroEdicaoForm()
         {
             InitializeComponent();
 
-            _idParaEditar = modoEdicao;
+            _idParaEditar = modoCadastro;
 
             _clienteService = new ClienteService();
         }
@@ -27,18 +28,35 @@ namespace Entra21.BancoDados02.Ado.Net.Views.Clientes
 
             textBoxNome.Text = cliente.Nome;
             maskedTextBoxCpf.Text = cliente.Cpf;
-            textBoxRenda.Text = cliente.Renda.ToString();
-            checkBoxInadimplente.Checked = cliente.EhInadimplente;
+            textBoxRenda.Text = DecimalHelper.ObterValorFormatado(cliente.Renda);
+            if (cliente.EhInadimplente)
+                radioButtonStatusInadimplente.Checked = true;
+            else
+                radioButtonStatusRegular.Checked = true;
             dateTimePickerDataNascimento.Value = cliente.DataNascimento;
+            richTextBoxObservacao.Text = cliente.Observacao;
         }
 
         private void buttonSalvar_Click(object sender, EventArgs e)
         {
             var nome = textBoxNome.Text.Trim();
-            var renda = Convert.ToDecimal(RemoverFormatacaoDinheiro(textBoxNome.Text));
+            decimal renda;
+            try
+            {
+                renda = Convert.ToDecimal(DecimalHelper.RemoverMoedaConverterDecimal(textBoxRenda.Text));
+            }
+            catch (Exception)
+            {
+                CustomMessageBox.ShowError("Campo de renda deve conter somente valores decimais.");
+
+                textBoxRenda.Focus();
+
+                return;
+            }
             var cpf = maskedTextBoxCpf.Text.Trim();
             var dataNascimento = dateTimePickerDataNascimento.Value;
-            var ehInadimplente = checkBoxInadimplente.Checked;
+            var ehInadimplente = radioButtonStatusInadimplente.Checked;
+            var observacao = richTextBoxObservacao.Text.Trim();
 
             try
             {
@@ -48,11 +66,12 @@ namespace Entra21.BancoDados02.Ado.Net.Views.Clientes
                 cliente.Cpf = cpf;
                 cliente.DataNascimento = dataNascimento;
                 cliente.EhInadimplente = ehInadimplente;
+                cliente.Observacao = observacao;
 
-                if (_idParaEditar == modoEdicao)
-                    EditarCliente(cliente);
-                else
+                if (_idParaEditar == modoCadastro)
                     CadastrarCliente(cliente);
+                else
+                    EditarCliente(cliente);
             }
             catch (SqlException)
             {
@@ -60,17 +79,11 @@ namespace Entra21.BancoDados02.Ado.Net.Views.Clientes
             }
         }
 
-        private string RemoverFormatacaoDinheiro(string texto)
-        {
-            return texto.Replace("R$", string.Empty)
-                .Replace(".", string.Empty)
-                .Replace(",", ".")
-                .Trim();
-        }
-
         private void EditarCliente(Cliente cliente)
         {
-            _clienteService.Cadastrar(cliente);
+            cliente.Id = _idParaEditar;
+
+            _clienteService.Editar(cliente);
 
             CustomMessageBox.ShowSuccess("Cliente alterado com sucesso ");
 
@@ -79,9 +92,7 @@ namespace Entra21.BancoDados02.Ado.Net.Views.Clientes
 
         private void CadastrarCliente(Cliente cliente)
         {
-            cliente.Id = _idParaEditar;
-
-            _clienteService.Editar(cliente);
+            _clienteService.Cadastrar(cliente);
 
             CustomMessageBox.ShowSuccess("Cliente cadastrado com sucesso");
 

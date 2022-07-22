@@ -6,5 +6,11 @@
         {
             InitializeComponent();
         }
+
+        private void buttonCadastrar_Click(object sender, EventArgs e)
+        {
+            var pedidoForm = new OrcamentoCadastroForm();
+            pedidoForm.ShowDialog();
+        }
     }
 }

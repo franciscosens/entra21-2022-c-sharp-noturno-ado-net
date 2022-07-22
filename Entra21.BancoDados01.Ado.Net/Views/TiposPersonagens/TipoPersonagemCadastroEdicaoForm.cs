@@ -56,5 +56,9 @@ namespace Entra21.BancoDados01.Ado.Net.Views.TiposPersonagens
             Close();
         }
 
+        private void buttonCancelar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -7,7 +7,10 @@ namespace Entra21.BancoDados02.Ado.Net.Database
         public SqlCommand ConectarCriandoComando()
         {
             var conexao = new SqlConnection();
-            conexao.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|BancoDados.mdf;Integrated Security=True;Connect Timeout=30";
+
+            var nomeBanco = "BancoDados";
+            var caminhoCompleto = Directory.GetCurrentDirectory().Substring(0, AppContext.BaseDirectory.LastIndexOf("\\bin"));
+            conexao.ConnectionString = $@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={caminhoCompleto}\Database\{nomeBanco}.mdf;Integrated Security=True";
 
             conexao.Open();
 

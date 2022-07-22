@@ -10,7 +10,8 @@ CREATE TABLE clientes(
 	cpf CHAR(14) NOT NULL, -- tamamho fixo de 14
 	renda DECIMAL(8, 2) NOT NULL,
 	eh_inadimplente BIT NOT NULL, -- boolean
-	data_nascimento DATETIME2 NOT NULL
+	data_nascimento DATETIME2 NOT NULL,
+	observacao TEXT
 );
 
 CREATE TABLE produtos(
@@ -25,7 +26,13 @@ CREATE TABLE pedidos(
 	id_cliente  INTEGER NOT NULL,
 
 	valor_total DECIMAL(10, 2) NOT NULL,
-	data_compra DATETIME2 NOT NULL,
+	data_orcamento_abertura DATETIME2 NOT NULL,
+	modo_retirada TINYINT NOT NULL,
+	status TINYINT NOT NULL,
+	observacoes TEXT,
+
+	data_orcamento_finalizacao DATETIME2,
+	data_pedido_gerado DATETIME2,
 
 	FOREIGN KEY(id_cliente) REFERENCES clientes(id)
 );
@@ -59,9 +66,9 @@ INSERT INTO clientes (nome, renda, data_nascimento, cpf, eh_inadimplente) VALUES
 ('Raquel Jaqueline Mendes', 5329.19, '1986-05-04', '369.301.807-34', 0),
 ('Aurora Ester Bernardes', 12392.21, '1986-03-15', '612.255.280-11', 0);
 
-INSERT INTO pedidos (id_cliente, valor_total, data_compra) VALUES
-(2, 25924.11, '2022-01-10' ), -- Raquel
-(1, 5541.19, '2022-03-30'); -- Theo
+INSERT INTO pedidos (id_cliente, valor_total, data_abertura, status) VALUES
+(2, 25924.11, '2022-01-10', 1), -- Raquel
+(1, 5541.19, '2022-03-30', 0); -- Theo
 
 INSERT INTO pedidos_produtos (id_pedido, id_produto, quantidade) VALUES
 (1, 3, 2), -- Raquel, TV 70 SAMSUNG QLED 4k, qtd: 2
@@ -80,6 +87,7 @@ SELECT
 	cli.nome AS 'Cliente', 
 	ped.id AS 'Número do pedido',
 	ped.valor_total AS 'Valor total do pedido',
+	ped.status AS 'Status',
 	pro.nome AS 'Produto',
 	pp.quantidade AS  'Quantidade',
 	pro.valor_unitario AS 'Valor Unitário',

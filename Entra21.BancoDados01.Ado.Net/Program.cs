@@ -1,5 +1,4 @@
 using Entra21.BancoDados01.Ado.Net.Views;
-using Entra21.BancoDados01.Ado.Net.Views.Personagens;
 
 namespace Entra21.BancoDados01.Ado.Net
 {

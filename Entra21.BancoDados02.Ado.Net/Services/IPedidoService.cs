@@ -6,8 +6,9 @@ namespace Entra21.BancoDados02.Ado.Net.Services
     {
         List<Pedido> ObterTodos();
         Pedido ObterPorId(int id);
-        void Cadastrar(Pedido pedido);
-        void Editar(Pedido pedido);
+        int IniciarOrcamento(Pedido pedido);
+        void GerarPedido(Pedido pedido);
+        void FinalizarOrcamento(Pedido pedido);
         void Apagar(int id);
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Entra21.BancoDados02.Ado.Net.Views.Components
+﻿using Entra21.BancoDados02.Ado.Net.Enums;
+
+namespace Entra21.BancoDados02.Ado.Net.Views.Components
 {
     public partial class CustomMessageBoxForm : Form
     {

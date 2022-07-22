@@ -1,10 +1,17 @@
-﻿namespace Entra21.BancoDados02.Ado.Net.Models
+﻿using Entra21.BancoDados02.Ado.Net.Enums;
+
+namespace Entra21.BancoDados02.Ado.Net.Models
 {
     public class Pedido
     {
         public int Id { get; set; }
-        public DateTime DataCompra { get; set; }
+        public DateTime DataOrcamentoFinalizado { get; set; }
+        public DateTime DataOrcamentoAbertura { get; set; }
+        public DateTime DataPedidoGerado { get; set; }
         public decimal ValorTotalPedido { get; set; }
+        public string Observacoes { get; internal set; }
+        public PedidoStatus Status { get; set; }
+        public PedidoModoRetirada ModoRetirada { get; internal set; }
 
         public Cliente Cliente { get; set; }
         public List<PedidoProduto> PedidosProdutos { get; set; }

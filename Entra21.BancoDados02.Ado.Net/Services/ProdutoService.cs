@@ -80,10 +80,28 @@ WHERE id = @ID";
             return produto;
         }
 
-        public List<Produto> ObterTodos()
+        public List<Produto> ObterTodos(
+            string nomePesquisa, 
+            decimal minimoValorUnitario, 
+            decimal maximoValorUnitario)
         {
             var comando = _conexao.ConectarCriandoComando();
-            comando.CommandText = "SELECT id, nome, valor_unitario FROM produtos";
+            comando.CommandText = @"SELECT id, nome, valor_unitario
+FROM produtos
+WHERE nome LIKE @NOME";
+            comando.Parameters.AddWithValue("@NOME", $"%{nomePesquisa}%");
+
+            if (minimoValorUnitario != decimal.MinValue)
+            {
+                comando.CommandText += " AND valor_unitario >= @MINIMO_VALOR_UNITARIO";
+                comando.Parameters.AddWithValue("@MINIMO_VALOR_UNITARIO", minimoValorUnitario);
+            }
+
+            if (maximoValorUnitario != decimal.MinValue)
+            {
+                comando.CommandText += " AND valor_unitario <= @MAXIMO_VALOR_UNITARIO";
+                comando.Parameters.AddWithValue("@MAXIMO_VALOR_UNITARIO", maximoValorUnitario);
+            }
 
             var tabelaEmMemoria = new DataTable();
             tabelaEmMemoria.Load(comando.ExecuteReader());

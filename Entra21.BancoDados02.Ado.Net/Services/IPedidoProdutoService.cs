@@ -7,5 +7,6 @@ namespace Entra21.BancoDados02.Ado.Net.Services
         void Cadastrar(PedidoProduto pedidoProduto);
         void Editar(PedidoProduto pedidoProduto);
         void Apagar(int id);
+        List<PedidoProduto> ObterPorIdPedido(int idPedido);
     }
 }

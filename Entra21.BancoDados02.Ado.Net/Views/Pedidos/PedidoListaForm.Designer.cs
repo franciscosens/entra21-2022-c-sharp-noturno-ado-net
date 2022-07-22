@@ -28,20 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.buttonCadastrar = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // buttonCadastrar
+            // 
+            this.buttonCadastrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonCadastrar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonCadastrar.Image = global::Entra21.BancoDados02.Ado.Net.Properties.Resources.plus;
+            this.buttonCadastrar.Location = new System.Drawing.Point(425, 259);
+            this.buttonCadastrar.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonCadastrar.Name = "buttonCadastrar";
+            this.buttonCadastrar.Size = new System.Drawing.Size(42, 42);
+            this.buttonCadastrar.TabIndex = 9;
+            this.buttonCadastrar.UseVisualStyleBackColor = true;
+            this.buttonCadastrar.Click += new System.EventHandler(this.buttonCadastrar_Click);
             // 
             // PedidoListaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(884, 561);
+            this.Controls.Add(this.buttonCadastrar);
             this.Name = "PedidoListaForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Pedidos";
+            this.Text = "Lista de Pedidos";
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private Button buttonCadastrar;
     }
 }

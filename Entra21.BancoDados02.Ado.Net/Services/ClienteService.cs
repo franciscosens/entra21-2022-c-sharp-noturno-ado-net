@@ -1,4 +1,5 @@
 ﻿using Entra21.BancoDados02.Ado.Net.Database;
+using Entra21.BancoDados02.Ado.Net.Enums;
 using Entra21.BancoDados02.Ado.Net.Models;
 using System.Data;
 
@@ -29,14 +30,15 @@ namespace Entra21.BancoDados02.Ado.Net.Services
         {
             var comando = _conexao.ConectarCriandoComando();
             comando.CommandText = @"INSERT INTO clientes
-(nome, renda, cpf, data_nascimento, eh_inadimplente) 
-VALUES (@NOME, @RENDA, @CPF, @DATA_NASCIMENTO, @EH_INADIMPLENTE)";
+(nome, renda, cpf, data_nascimento, eh_inadimplente, observacao) 
+VALUES (@NOME, @RENDA, @CPF, @DATA_NASCIMENTO, @EH_INADIMPLENTE, @OBSERVACAO)";
 
             comando.Parameters.AddWithValue("@NOME", cliente.Nome);
             comando.Parameters.AddWithValue("@RENDA", cliente.Renda);
             comando.Parameters.AddWithValue("@CPF", cliente.Cpf);
             comando.Parameters.AddWithValue("@DATA_NASCIMENTO", cliente.DataNascimento);
             comando.Parameters.AddWithValue("@EH_INADIMPLENTE", cliente.EhInadimplente);
+            comando.Parameters.AddWithValue("@OBSERVACAO", cliente.Observacao);
 
             comando.ExecuteNonQuery();
 
@@ -51,7 +53,8 @@ nome = @NOME,
 renda = @RENDA,
 cpf = @CPF,
 data_nascimento = @DATA_NASCIMENTO,
-eh_inadimplente = @EH_INADIMPLENTE
+eh_inadimplente = @EH_INADIMPLENTE,
+observacao = @OBSERVACAO
 WHERE id = @ID";
 
             comando.Parameters.AddWithValue("@NOME", cliente.Nome);
@@ -59,6 +62,7 @@ WHERE id = @ID";
             comando.Parameters.AddWithValue("@CPF", cliente.Cpf);
             comando.Parameters.AddWithValue("@DATA_NASCIMENTO", cliente.DataNascimento);
             comando.Parameters.AddWithValue("@EH_INADIMPLENTE", cliente.EhInadimplente);
+            comando.Parameters.AddWithValue("@OBSERVACAO", cliente.Observacao);
             comando.Parameters.AddWithValue("@ID", cliente.Id);
 
             comando.ExecuteNonQuery();
@@ -69,7 +73,7 @@ WHERE id = @ID";
         public Cliente ObterPorId(int id)
         {
             var comando = _conexao.ConectarCriandoComando();
-            comando.CommandText = @"SELECT id, nome, renda, cpf, data_nascimento, eh_inadimplente 
+            comando.CommandText = @"SELECT id, nome, renda, cpf, data_nascimento, eh_inadimplente, observacao
 FROM clientes
 WHERE id = @ID";
             comando.Parameters.AddWithValue("@ID", id);
@@ -86,19 +90,36 @@ WHERE id = @ID";
             cliente.Id = Convert.ToInt32(registro["id"]);
             cliente.Nome = registro["nome"].ToString();
             cliente.Cpf = registro["cpf"].ToString();
+            cliente.Observacao = registro["observacao"].ToString();
             cliente.Renda = Convert.ToDecimal(registro["renda"]);
             cliente.DataNascimento = Convert.ToDateTime(registro["data_nascimento"]);
-            cliente.EhInadimplente = Convert.ToBoolean(registro["inadimplente"]);
+            cliente.EhInadimplente = Convert.ToBoolean(registro["eh_inadimplente"]);
 
             comando.Connection.Close();
 
             return cliente;
         }
 
-        public List<Cliente> ObterTodos()
+        public List<Cliente> ObterTodosFiltrando(
+            string nomePesquisa,
+            ClienteListaFiltroStatus clienteListaFiltroStatus)
         {
             var comando = _conexao.ConectarCriandoComando();
-            comando.CommandText = "SELECT id, nome, renda, cpf, data_nascimento, eh_inadimplente FROM clientes";
+
+            comando.CommandText = @"SELECT 
+id, nome, renda, cpf, data_nascimento, eh_inadimplente
+FROM clientes 
+WHERE nome LIKE @NOME";
+            comando.Parameters.AddWithValue("@NOME", $"%{nomePesquisa}%");
+
+            if (clienteListaFiltroStatus == ClienteListaFiltroStatus.Inadimplente ||
+                clienteListaFiltroStatus == ClienteListaFiltroStatus.Regular)
+            {
+                comando.CommandText += " AND eh_inadimplente = @EH_INADIMPLENTE";
+
+                comando.Parameters.AddWithValue("@EH_INADIMPLENTE", clienteListaFiltroStatus == ClienteListaFiltroStatus.Inadimplente);
+            }
+
 
             var tabelaEmMemoria = new DataTable();
             tabelaEmMemoria.Load(comando.ExecuteReader());
@@ -115,7 +136,7 @@ WHERE id = @ID";
                 cliente.Cpf = registro["cpf"].ToString();
                 cliente.Renda = Convert.ToDecimal(registro["renda"]);
                 cliente.DataNascimento = Convert.ToDateTime(registro["data_nascimento"]);
-                cliente.EhInadimplente = Convert.ToBoolean(registro["inadimplente"]);
+                cliente.EhInadimplente = Convert.ToBoolean(registro["eh_inadimplente"]);
 
                 clientes.Add(cliente);
             }
