@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label3 = new System.Windows.Forms.Label();
             this.labelCliente = new System.Windows.Forms.Label();
             this.buttonGerarPedido = new System.Windows.Forms.Button();
@@ -68,6 +68,7 @@
             this.radioButtonModoRetiradaEntrega = new System.Windows.Forms.RadioButton();
             this.labelQuantidadeItens = new System.Windows.Forms.Label();
             this.labelQuantidadeItensValor = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantidade)).BeginInit();
@@ -77,7 +78,7 @@
             // 
             this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(138, 4);
+            this.label3.Location = new System.Drawing.Point(138, 31);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(19, 15);
             this.label3.TabIndex = 23;
@@ -88,7 +89,7 @@
             // 
             this.labelCliente.AutoSize = true;
             this.labelCliente.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelCliente.Location = new System.Drawing.Point(12, 5);
+            this.labelCliente.Location = new System.Drawing.Point(12, 32);
             this.labelCliente.Name = "labelCliente";
             this.labelCliente.Size = new System.Drawing.Size(131, 21);
             this.labelCliente.TabIndex = 20;
@@ -157,16 +158,16 @@
             this.buttonFinalizarOrcamento.Text = "Finalizar Orçamento";
             this.buttonFinalizarOrcamento.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.buttonFinalizarOrcamento.UseVisualStyleBackColor = true;
+            this.buttonFinalizarOrcamento.Click += new System.EventHandler(this.buttonFinalizarOrcamento_Click);
             // 
             // comboBoxCliente
             // 
             this.comboBoxCliente.DisplayMember = "Nome";
-            this.comboBoxCliente.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.comboBoxCliente.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.comboBoxCliente.ItemHeight = 29;
-            this.comboBoxCliente.Location = new System.Drawing.Point(12, 29);
+            this.comboBoxCliente.ItemHeight = 21;
+            this.comboBoxCliente.Location = new System.Drawing.Point(12, 56);
             this.comboBoxCliente.Name = "comboBoxCliente";
-            this.comboBoxCliente.Size = new System.Drawing.Size(316, 35);
+            this.comboBoxCliente.Size = new System.Drawing.Size(316, 29);
             this.comboBoxCliente.TabIndex = 24;
             this.comboBoxCliente.ValueMember = "Nome";
             this.comboBoxCliente.SelectedIndexChanged += new System.EventHandler(this.comboBoxCliente_SelectedIndexChanged);
@@ -177,24 +178,24 @@
             this.dataGridView.AllowUserToDeleteRows = false;
             this.dataGridView.AllowUserToResizeColumns = false;
             this.dataGridView.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(236)))), ((int)(((byte)(239)))));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
-            this.dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(236)))), ((int)(((byte)(239)))));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            this.dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.RaisedHorizontal;
             this.dataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(10, 10, 0, 5);
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(10, 10, 0, 5);
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnNome,
@@ -206,17 +207,17 @@
             this.dataGridView.Location = new System.Drawing.Point(356, 191);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(215)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(53)))), ((int)(((byte)(69)))));
-            this.dataGridView.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(215)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(53)))), ((int)(((byte)(69)))));
+            this.dataGridView.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView.RowTemplate.Height = 40;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView.Size = new System.Drawing.Size(616, 452);
@@ -258,14 +259,13 @@
             this.comboBoxProduto.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxProduto.DisplayMember = "Nome";
-            this.comboBoxProduto.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.comboBoxProduto.Enabled = false;
             this.comboBoxProduto.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.comboBoxProduto.FormattingEnabled = true;
-            this.comboBoxProduto.ItemHeight = 29;
+            this.comboBoxProduto.ItemHeight = 21;
             this.comboBoxProduto.Location = new System.Drawing.Point(359, 56);
             this.comboBoxProduto.Name = "comboBoxProduto";
-            this.comboBoxProduto.Size = new System.Drawing.Size(516, 35);
+            this.comboBoxProduto.Size = new System.Drawing.Size(516, 29);
             this.comboBoxProduto.TabIndex = 103;
             this.comboBoxProduto.SelectedIndexChanged += new System.EventHandler(this.comboBoxProduto_SelectedIndexChanged);
             // 
@@ -423,7 +423,7 @@
             this.labelObservacoes.AutoSize = true;
             this.labelObservacoes.Enabled = false;
             this.labelObservacoes.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelObservacoes.Location = new System.Drawing.Point(12, 126);
+            this.labelObservacoes.Location = new System.Drawing.Point(12, 168);
             this.labelObservacoes.Name = "labelObservacoes";
             this.labelObservacoes.Size = new System.Drawing.Size(99, 21);
             this.labelObservacoes.TabIndex = 112;
@@ -434,7 +434,7 @@
             this.labelModoRetirada.AutoSize = true;
             this.labelModoRetirada.Enabled = false;
             this.labelModoRetirada.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelModoRetirada.Location = new System.Drawing.Point(12, 67);
+            this.labelModoRetirada.Location = new System.Drawing.Point(13, 97);
             this.labelModoRetirada.Name = "labelModoRetirada";
             this.labelModoRetirada.Size = new System.Drawing.Size(113, 21);
             this.labelModoRetirada.TabIndex = 113;
@@ -468,7 +468,7 @@
             this.buttonIniciarOrcamento.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonIniciarOrcamento.Image = global::Entra21.BancoDados02.Ado.Net.Properties.Resources.orcamento_gerado;
             this.buttonIniciarOrcamento.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonIniciarOrcamento.Location = new System.Drawing.Point(189, 587);
+            this.buttonIniciarOrcamento.Location = new System.Drawing.Point(189, 611);
             this.buttonIniciarOrcamento.Name = "buttonIniciarOrcamento";
             this.buttonIniciarOrcamento.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
             this.buttonIniciarOrcamento.Size = new System.Drawing.Size(139, 56);
@@ -485,9 +485,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBoxObservacoes.Enabled = false;
             this.richTextBoxObservacoes.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.richTextBoxObservacoes.Location = new System.Drawing.Point(12, 150);
+            this.richTextBoxObservacoes.Location = new System.Drawing.Point(12, 191);
             this.richTextBoxObservacoes.Name = "richTextBoxObservacoes";
-            this.richTextBoxObservacoes.Size = new System.Drawing.Size(310, 431);
+            this.richTextBoxObservacoes.Size = new System.Drawing.Size(316, 414);
             this.richTextBoxObservacoes.TabIndex = 116;
             this.richTextBoxObservacoes.Text = "";
             // 
@@ -496,7 +496,7 @@
             this.labelModoRetiradaObrigatoriedade.Enabled = false;
             this.labelModoRetiradaObrigatoriedade.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.labelModoRetiradaObrigatoriedade.ForeColor = System.Drawing.Color.Red;
-            this.labelModoRetiradaObrigatoriedade.Location = new System.Drawing.Point(118, 65);
+            this.labelModoRetiradaObrigatoriedade.Location = new System.Drawing.Point(119, 95);
             this.labelModoRetiradaObrigatoriedade.Name = "labelModoRetiradaObrigatoriedade";
             this.labelModoRetiradaObrigatoriedade.Size = new System.Drawing.Size(19, 15);
             this.labelModoRetiradaObrigatoriedade.TabIndex = 117;
@@ -520,7 +520,7 @@
             this.radioButtonModoRetiradaLoja.AutoSize = true;
             this.radioButtonModoRetiradaLoja.Enabled = false;
             this.radioButtonModoRetiradaLoja.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.radioButtonModoRetiradaLoja.Location = new System.Drawing.Point(99, 92);
+            this.radioButtonModoRetiradaLoja.Location = new System.Drawing.Point(100, 122);
             this.radioButtonModoRetiradaLoja.Name = "radioButtonModoRetiradaLoja";
             this.radioButtonModoRetiradaLoja.Size = new System.Drawing.Size(57, 25);
             this.radioButtonModoRetiradaLoja.TabIndex = 120;
@@ -533,7 +533,7 @@
             this.radioButtonModoRetiradaEntrega.Checked = true;
             this.radioButtonModoRetiradaEntrega.Enabled = false;
             this.radioButtonModoRetiradaEntrega.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.radioButtonModoRetiradaEntrega.Location = new System.Drawing.Point(12, 92);
+            this.radioButtonModoRetiradaEntrega.Location = new System.Drawing.Point(13, 122);
             this.radioButtonModoRetiradaEntrega.Name = "radioButtonModoRetiradaEntrega";
             this.radioButtonModoRetiradaEntrega.Size = new System.Drawing.Size(81, 25);
             this.radioButtonModoRetiradaEntrega.TabIndex = 119;
@@ -565,11 +565,22 @@
             this.labelQuantidadeItensValor.TabIndex = 122;
             this.labelQuantidadeItensValor.Text = "0";
             // 
-            // PedidoCadastroForm
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(12, 7);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(232, 21);
+            this.label1.TabIndex = 123;
+            this.label1.Text = "Dados básicos de orçamento:";
+            // 
+            // OrcamentoCadastroForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 761);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.labelQuantidadeItensValor);
             this.Controls.Add(this.labelQuantidadeItens);
             this.Controls.Add(this.radioButtonModoRetiradaLoja);
@@ -599,7 +610,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.labelCliente);
             this.Controls.Add(this.panel1);
-            this.Name = "PedidoCadastroForm";
+            this.Name = "OrcamentoCadastroForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro de Orçamento";
             this.panel1.ResumeLayout(false);
@@ -648,5 +659,6 @@
         private DataGridViewTextBoxColumn ColumnStatus;
         private DataGridViewTextBoxColumn ColumnValorUnitario;
         private DataGridViewTextBoxColumn ColumnValorTotal;
+        private Label label1;
     }
 }

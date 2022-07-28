@@ -4,6 +4,7 @@
     {
         OrcamentoIniciado,
         OrcamentoFinalizado,
-        Gerado
+        Gerado,
+        Todos
     }
 }

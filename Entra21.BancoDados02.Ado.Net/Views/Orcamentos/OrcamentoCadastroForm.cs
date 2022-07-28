@@ -198,6 +198,9 @@ namespace Entra21.BancoDados02.Ado.Net.Views.Pedidos
             labelProdutoValorUnitarioValor.Enabled = false;
             labelProdutoValorTotal.Enabled = false;
             labelProdutoValorTotalValor.Enabled = false;
+
+            labelProdutoValorTotalValor.Text = "R$ 0,00";
+            labelProdutoValorUnitarioValor.Text = "R$ 0,00";
         }
 
         private void PreencherDataGridViewProdutosOrcados()
@@ -242,7 +245,51 @@ namespace Entra21.BancoDados02.Ado.Net.Views.Pedidos
 
         private void buttonGerarPedido_Click(object sender, EventArgs e)
         {
+            try
+            {
+                var pedido = new Pedido();
+                pedido.Id = idPedido;
+                pedido.ModoRetirada = ObterModoRetirada();
+                pedido.Observacoes = richTextBoxObservacoes.Text.Trim();
+                pedido.DataOrcamentoFinalizado = DateTime.Now;
+                pedido.DataPedidoGerado = DateTime.Now;
+                pedido.Status = PedidoStatus.Gerado;
+                pedido.ValorTotalPedido = DecimalHelper.RemoverMoedaConverterDecimal(labelTotalOrcamentoValor.Text);
 
+                _pedidoService.GerarPedido(pedido);
+
+                CustomMessageBox.ShowSuccess("Pedido gerado com sucesso");
+
+                Close();
+            }
+            catch (Exception)
+            {
+                CustomMessageBox.ShowError("Não foi possível gerar o pedido, desculpe pelo incomodo");
+            }
+        }
+
+        private void buttonFinalizarOrcamento_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var pedido = new Pedido();
+                pedido.Id = idPedido;
+                pedido.ModoRetirada = ObterModoRetirada();
+                pedido.Observacoes = richTextBoxObservacoes.Text.Trim();
+                pedido.DataOrcamentoFinalizado = DateTime.Now;
+                pedido.Status = PedidoStatus.OrcamentoIniciado;
+                pedido.ValorTotalPedido = DecimalHelper.RemoverMoedaConverterDecimal(labelTotalOrcamentoValor.Text);
+
+                _pedidoService.FinalizarOrcamento(pedido);
+
+                CustomMessageBox.ShowSuccess("Finalizado orçamento com sucesso");
+
+                Close();
+            }
+            catch (Exception)
+            {
+                CustomMessageBox.ShowError("Não foi possível finalizar este orçamento, desculpe pelo incomodo");
+            }
         }
     }
 }

@@ -13,19 +13,19 @@ namespace Entra21.BancoDados02.Ado.Net.Views
 
         private void buttonClientes_Click(object sender, EventArgs e)
         {
-            var clientesForm = new ClienteCadastroEdicaoForm();
+            var clientesForm = new ClienteListaForm();
             clientesForm.ShowDialog();
         }
 
         private void buttonProdutos_Click(object sender, EventArgs e)
         {
-            var produtosForm = new ProdutoCadastroEdicaoForm();
+            var produtosForm = new ProdutoListaForm();
             produtosForm.ShowDialog();
         }
 
         private void buttonOrcamentos_Click(object sender, EventArgs e)
         {
-            var orcamentoForm = new OrcamentoCadastroForm();
+            var orcamentoForm = new OrcamentoListaForm();
             orcamentoForm.ShowDialog();
         }
     }

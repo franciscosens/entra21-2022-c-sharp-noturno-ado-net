@@ -31,7 +31,6 @@
             this.buttonCliente = new System.Windows.Forms.Button();
             this.buttonProdutos = new System.Windows.Forms.Button();
             this.buttonOrcamentos = new System.Windows.Forms.Button();
-            this.buttonPedidos = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonCliente
@@ -73,28 +72,16 @@
             this.buttonOrcamentos.UseVisualStyleBackColor = true;
             this.buttonOrcamentos.Click += new System.EventHandler(this.buttonOrcamentos_Click);
             // 
-            // buttonPedidos
-            // 
-            this.buttonPedidos.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonPedidos.Image = global::Entra21.BancoDados02.Ado.Net.Properties.Resources.box;
-            this.buttonPedidos.Location = new System.Drawing.Point(672, 12);
-            this.buttonPedidos.Name = "buttonPedidos";
-            this.buttonPedidos.Size = new System.Drawing.Size(200, 200);
-            this.buttonPedidos.TabIndex = 3;
-            this.buttonPedidos.Text = "Pedidos";
-            this.buttonPedidos.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.buttonPedidos.UseVisualStyleBackColor = true;
-            // 
             // MenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(884, 225);
-            this.Controls.Add(this.buttonPedidos);
+            this.ClientSize = new System.Drawing.Size(667, 225);
             this.Controls.Add(this.buttonOrcamentos);
             this.Controls.Add(this.buttonProdutos);
             this.Controls.Add(this.buttonCliente);
             this.Name = "MenuForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MenuForm";
             this.ResumeLayout(false);
 
@@ -105,6 +92,5 @@
         private Button buttonCliente;
         private Button buttonProdutos;
         private Button buttonOrcamentos;
-        private Button buttonPedidos;
     }
 }

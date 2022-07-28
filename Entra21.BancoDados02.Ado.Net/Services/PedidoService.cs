@@ -51,15 +51,15 @@ VALUES (@ID_CLIENTE, @DATA_ORCAMENTO_ABERTURA, @MODO_RETIRADA, @OBSERVACOES, @ST
         {
             var comando = _conexao.ConectarCriandoComando();
             comando.CommandText = @"UPDATE pedidos SET 
-data_finalizacao_orcamento = @DATA_FINALIZACAO_ORCAMENTO,
+data_orcamento_finalizacao = @DATA_FINALIZACAO_ORCAMENTO,
 observacoes = @OBSERVACOES,
 status = @STATUS,
 valor_total = @VALOR_TOTAL_PEDIDO
 WHERE id = @ID_PEDIDO";
 
-            comando.Parameters.AddWithValue("@DATA_FINALIZACAO_ORCAMENTO", DateTime.Now);
+            comando.Parameters.AddWithValue("@DATA_FINALIZACAO_ORCAMENTO", pedido.DataOrcamentoFinalizado);
             comando.Parameters.AddWithValue("@OBSERVACOES", pedido.Observacoes);
-            comando.Parameters.AddWithValue("@STATUS", PedidoStatus.OrcamentoFinalizado);
+            comando.Parameters.AddWithValue("@STATUS", pedido.Status);
             comando.Parameters.AddWithValue("@VALOR_TOTAL_PEDIDO", pedido.ValorTotalPedido);
             comando.Parameters.AddWithValue("@ID_PEDIDO", pedido.Id);
 
@@ -73,13 +73,13 @@ WHERE id = @ID_PEDIDO";
             var comando = _conexao.ConectarCriandoComando();
             comando.CommandText = @"UPDATE pedidos SET 
 data_pedido_gerado = @DATA_PEDIDO_GERADO,
-data_finalizacao_orcamento = @DATA_FINALIZACAO_ORCAMENTO,
+data_orcamento_finalizacao = @DATA_FINALIZACAO_ORCAMENTO,
 observacoes = @OBSERVACOES,
 status = @STATUS,
 valor_total = @VALOR_TOTAL_PEDIDO
 WHERE id = @ID_PEDIDO";
 
-            comando.Parameters.AddWithValue("@DATA_FINALIZACAO_ORCAMENTO", DateTime.Now);
+            comando.Parameters.AddWithValue("@DATA_PEDIDO_GERADO", DateTime.Now);
             comando.Parameters.AddWithValue("@DATA_FINALIZACAO_ORCAMENTO", DateTime.Now);
             comando.Parameters.AddWithValue("@OBSERVACOES", pedido.Observacoes);
             comando.Parameters.AddWithValue("@STATUS", PedidoStatus.Gerado);
@@ -121,8 +121,12 @@ WHERE id = @ID";
             var pedido = new Pedido();
             pedido.Id = Convert.ToInt32(registro["PedidoId"]);
             pedido.Observacoes = registro["PedidoObservacoes"].ToString();
-            //pedido.ModoRetirada = Convert.ToInt32(registro["PedidoModoRetirada"]) as PedidoModoRetirada;
-            //pedido.Status = Convert.ToInt32(registro["PedidoStatus"]) as PedidoStatus;
+
+            var modoRetirada = Convert.ToInt32(registro["PedidoModoRetirada"].ToString);
+            pedido.ModoRetirada = (PedidoModoRetirada)modoRetirada;
+
+            var status = Convert.ToInt32(registro["PedidoStatus"].ToString);
+            pedido.Status = (PedidoStatus)status;
 
             pedido.ValorTotalPedido = Convert.ToDecimal(registro["PedidoValorTotalPedido"]);
             pedido.DataOrcamentoAbertura = Convert.ToDateTime(registro["PedidoDataOrcamentoAberto"]);
@@ -138,38 +142,49 @@ WHERE id = @ID";
             return pedido;
         }
 
-        public List<Pedido> ObterTodos()
+        public List<Pedido> ObterTodos(string nomeCliente, PedidoStatus pedidoStatus)
         {
             var comando = _conexao.ConectarCriandoComando();
             comando.CommandText = @"SELECT 
 p.id AS 'PedidoId',
-p.data_compra AS 'PedidoDataCompra',
-p.valor_total_pedido AS 'PedidoValorTotalPedido',
+p.valor_total AS 'PedidoValorTotalPedido',
+p.status AS 'PedidoStatus',
 c.id AS 'ClienteId',
 c.nome AS 'ClienteNome'
 FROM pedidos p
-INNER JOIN c ON(p.id_cliente = c.id)";
+INNER JOIN clientes AS c ON(p.id_cliente = c.id)
+WHERE c.nome LIKE @NOME";
+            comando.Parameters.AddWithValue("@NOME", $"%{nomeCliente}%");
+
+            if (pedidoStatus != PedidoStatus.Todos)
+            {
+                comando.CommandText += " AND p.status = @PEDIDO_STATUS";
+                comando.Parameters.AddWithValue("@PEDIDO_STATUS", pedidoStatus);
+            }
 
             var tabelaEmMemoria = new DataTable();
             tabelaEmMemoria.Load(comando.ExecuteReader());
 
             if (tabelaEmMemoria.Rows.Count == 0)
-                return null;
+                return new List<Pedido>();
 
-            var registro = tabelaEmMemoria.Rows[0];
 
             var pedidos = new List<Pedido>();
 
             for (int i = 0; i < tabelaEmMemoria.Rows.Count; i++)
             {
+                var registro = tabelaEmMemoria.Rows[i];
+
                 var pedido = new Pedido();
                 pedido.Id = Convert.ToInt32(registro["PedidoId"]);
                 pedido.ValorTotalPedido = Convert.ToDecimal(registro["PedidoValorTotalPedido"]);
-                pedido.DataOrcamentoAbertura = Convert.ToDateTime(registro["PedidoDataCompra"]);
+
+                var status = Convert.ToInt32(registro["PedidoStatus"].ToString());
+                pedido.Status = (PedidoStatus)status;
 
                 pedido.Cliente = new Cliente();
                 pedido.Cliente.Id = Convert.ToInt32(registro["ClienteId"]);
-                pedido.Cliente.Nome = registro["ClienteId"].ToString();
+                pedido.Cliente.Nome = registro["ClienteNome"].ToString();
 
                 pedidos.Add(pedido);
             }
